@@ -1,0 +1,90 @@
+<FourthScreen>:
+    canvas:
+        Color:
+            rgba: 0, 0, 0, 1  # Set the color to black (R=0, G=0, B=0, A=1)
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    ScrollView:
+        do_scroll_x: False  # Disable horizontal scrolling
+        do_scroll_y: True   # Enable vertical scrolling
+
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint_y: None
+            height: self.minimum_height
+            padding: 20, 20
+            spacing: 15
+
+            # Your widgets go here
+
+
+            Label:
+                text: "Copy this to teach chat gpt what to do"
+                size_hint_y: None
+                height: 40  # Optional: Adjust the height of each widget
+
+            Button:
+                text: "Teach Chat GPT"
+                on_press: root.copy_text()
+                size_hint_y: None
+                height: 40
+
+            Button:
+                text: "Chat GPT"
+                size_hint_y: None
+                height: 40
+                on_press: root.open_chat()
+
+            BoxLayout:
+                orientation: 'horizontal'
+                size_hint_y: None
+                height: '30dp'
+
+                CheckBox:
+                    id: feature_checkbox
+                    size_hint_x: None
+                    width: 32  # Adjust width as needed
+                    active: False
+                    on_active: root.on_checkbox_active(*args)  # Callback when the state changes
+
+                Label:
+                    text: 'Add captions (creating video can take longer)'
+                    size_hint_y: None  # Disable the vertical size hint
+                    height: '25dp'  # Set the label height to 25 density-independent pixels
+                    halign: 'left'  # Align the text to the left
+                    valign: 'middle'  # Align the text vertically in the middle
+                    text_size: self.width, None  # Set the text size to the width of the label
+                    padding_x: 10  # Add some padding on the x axis
+
+            Label:
+                text: "Tell chat gpt what is your pexel api key"
+                size_hint_y: None
+                height: 40
+
+            Button:
+                text: "How do I get Pexel API Key? Click Here"
+                on_press: root.open_link()
+                size_hint_y: None
+                height: 40
+
+            Label:
+                text: "Proposition to prompt for video, change {topic}, chose vertical or horizontal"
+                size_hint_y: None
+                height: 40
+
+            Button:
+                text: "Suggest prompt for video creation"
+                on_press: root.copy_proposition()
+                size_hint_y: None
+                height: 40
+
+            TextInput:
+                size_hint_y: None
+                height: 200
+                id: text_input
+            Button:
+                text: 'Create Video'
+                size_hint_y: None
+                height: 50
+                on_press: root.create_video(text_input.text)

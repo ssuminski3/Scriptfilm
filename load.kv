@@ -1,0 +1,22 @@
+<LoadScreen>:
+    canvas:
+        Color:
+            rgba: 0, 0, 0, 1  # Set the color to black (R=0, G=0, B=0, A=1)
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    BoxLayout:
+        id: layout
+        orientation: 'vertical'
+        Image:
+            id: loading_image
+            source: 'loading.gif'  # Replace 'loading.gif' with the path to your loading GIF
+            size_hint: None, None
+            size: 100, 100
+            pos_hint: {'center_x': 0.5, 'center_y': 0.6}
+        Label:
+            id: status_label
+            text: 'Loading...'
+            size_hint_y: None
+            height: self.texture_size[1]
+            pos_hint: {'center_x': 0.5, 'center_y': 0.4}

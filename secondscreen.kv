@@ -1,0 +1,107 @@
+<SecondScreen>:
+    canvas:
+        Color:
+            rgba: 0, 0, 0, 1  # Set the color to black (R=0, G=0, B=0, A=1)
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 10
+        spacing: 10
+        pos_hint: {'center_x': 0.5, 'top': 1}
+        Spinner:
+            id: lang_spinner
+            text: 'en (English)'
+            values: ['af (Afrikaans)', 'ar (Arabic)', 'bn (Bengali)', 'bs (Bosnian)', 'ca (Catalan)', 'cs (Czech)', 'cy (Welsh)', 'da (Danish)', 'de (German)', 'el (Greek)', 'en (English)', 'eo (Esperanto)', 'es (Spanish)', 'et (Estonian)', 'fi (Finnish)', 'fr (French)', 'gu (Gujarati)', 'hi (Hindi)', 'hr (Croatian)', 'hu (Hungarian)', 'hy (Armenian)', 'id (Indonesian)', 'is (Icelandic)', 'it (Italian)', 'ja (Japanese)', 'jw (Javanese)', 'km (Khmer)', 'kn (Kannada)', 'ko (Korean)', 'la (Latin)', 'lv (Latvian)', 'mk (Macedonian)', 'ml (Malayalam)', 'mr (Marathi)', 'my (Myanmar (Burmese))', 'ne (Nepali)', 'nl (Dutch)', 'no (Norwegian)', 'pl (Polish)', 'pt (Portuguese)', 'ro (Romanian)', 'ru (Russian)', 'si (Sinhala)', 'sk (Slovak)', 'sq (Albanian)', 'sr (Serbian)', 'su (Sundanese)', 'sv (Swedish)', 'sw (Swahili)', 'ta (Tamil)', 'te (Telugu)', 'th (Thai)', 'tl (Filipino)', 'tr (Turkish)', 'uk (Ukrainian)', 'ur (Urdu)', 'vi (Vietnamese)', 'zh-CN (Chinese)']
+            pos_hint: {'center_x': 0.5, 'top': 1}
+            height: '30dp'
+            size_hint_y: None
+
+        TextInput:
+            id: api_key_input
+            hint_text: 'Paste Your API Key Here'
+            multiline: False
+            height: '30dp'
+            size_hint_y: None
+        Label:
+            text: 'How do I get Pexel API Key? [ref=Click Here]Click Here[/ref]'
+            markup: True
+            size_hint_y: None
+            on_ref_press: root.open_link()
+            height: '25dp'
+            halign: 'left'  # Align the text to the left
+            valign: 'middle'  # Align the text vertically in the middle
+            text_size: self.width, None  # Set the text size to the width of the label
+            padding_x: 10  # Add some padding on the x axis
+        Label:
+            text: '*You can use one Pexel Key API multiple times'
+            size_hint_y: None  # Disable the vertical size hint
+            color: 0.6, 0.6, 0.6, 1  # Light grey color in RGBA
+            height: '25dp'  # Set the label height to 25 density-independent pixels
+            font_size: '12sp'
+            halign: 'left'  # Align the text to the left
+            valign: 'middle'  # Align the text vertically in the middle
+            text_size: self.width, None  # Set the text size to the width of the label
+            padding_x: 10  # Add some padding on the x axis
+        TextInput:
+            id: title_input
+            hint_text: 'Write Title of Video'
+            multiline: False
+            height: '30dp'
+            size_hint_y: None
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint_y: None
+            height: '30dp'
+
+            CheckBox:
+                id: feature_checkbox
+                size_hint_x: None
+                width: 32  # Adjust width as needed
+                active: False
+                on_active: root.on_checkbox_active(*args)  # Callback when the state changes
+
+
+            Label:
+                text: 'Add captions (creating video can take longer)'
+                size_hint_y: None  # Disable the vertical size hint
+                height: '25dp'  # Set the label height to 25 density-independent pixels
+                halign: 'left'  # Align the text to the left
+                valign: 'middle'  # Align the text vertically in the middle
+                text_size: self.width, None  # Set the text size to the width of the label
+                padding_x: 10  # Add some padding on the x axis
+        BoxLayout:
+            orientation: 'horizontal'  # Change the orientation to horizontal
+            size_hint_y: None
+            height: '30dp'
+
+            Button:
+                id: vertical_btn
+                text: 'Vertical Alignment'
+                on_release: root.vertical_alignment_pressed()
+                size_hint_x: 0.5
+                disabled: True
+
+            Button:
+                id: horizontal_btn
+                text: 'Horizontal Alignment'
+                on_release: root.horizontal_alignment_pressed()
+                size_hint_x: 0.5
+        BoxLayout:
+            orientation: 'vertical'
+            padding: 10
+            spacing: 10
+            pos_hint: {'center_x': 0.5, 'top': 1}
+        Label:
+            id: message_label
+            text: ''  # Initially empty
+            color: 1, 0, 0, 1  # Red color for error messages
+            size_hint_y: None
+            height: '30dp'
+        Button:
+            text: 'Generate XML'
+            on_release: root.generate_xml(lang_spinner.text, api_key_input.text, title_input.text)
+            pos_hint: {'center_x': 0.5, 'top': 1}
+            height: '30dp'
+            size_hint_y: None

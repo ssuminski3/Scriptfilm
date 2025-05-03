@@ -1,0 +1,143 @@
+<MediaComponent>:
+    orientation: 'vertical'
+    spacing: 10
+    padding: 10
+    id: media_search_component
+    BoxLayout:
+        size_hint_y: None
+        height: 30
+
+        Button:
+            id: media_button
+            text: 'Select Media Type'
+            on_release: media_dropdown.open(self)
+
+        DropDown:
+            id: media_dropdown
+            on_select: root.set_media_type(args[1])
+
+    BoxLayout:
+        size_hint_y: None
+        height: 30
+        Label:
+            text: 'Text:'
+        TextInput:
+            id: text_input
+            hint_text: 'Text to be read'
+    BoxLayout:
+        size_hint_y: None
+        height: 30
+
+        Button:
+            id: select_file
+            text: 'Select File'
+            on_release: root.open_file_dialog()
+
+    BoxLayout:
+        size_hint_y: None
+        height: 30
+
+        Button:
+            id: language_button
+            text: 'current (o)'
+            on_release: language_dropdown.open(self)
+
+        DropDown:
+            id: language_dropdown
+            on_select: language_button.text = '{}'.format(args[1])
+    Button:
+        text: 'Delete'
+        size_hint_x: None
+        width: 100
+        background_color: 1, 0, 0, 1  # Red color
+        on_release: root.delete_self()
+
+
+<MediaSearchComponent>:
+    orientation: 'vertical'
+    spacing: 10
+    padding: 10
+    id: media_component
+    BoxLayout:
+        size_hint_y: None
+        height: 40
+
+        Button:
+            id: media_button
+            text: 'Select Media Type'
+            height: 60
+            on_release: media_dropdown.open(self)
+
+        DropDown:
+            id: media_dropdown
+            on_select: root.set_media_type(args[1])
+
+    BoxLayout:
+        size_hint_y: None
+        height: 30
+        Label:
+            text: 'Text:'
+        TextInput:
+            id: text_input
+            hint_text: 'Text to be read'
+    BoxLayout:
+        size_hint_y: None
+        height: 30
+        Label:
+            id: keyword_label
+            text: 'Keyword:'
+        TextInput:
+            id: keyword_input
+            hint_text: 'Word to search media to be shown'
+    BoxLayout:
+        size_hint_y: None
+        height: 30
+
+        Button:
+            id: language_button
+            text: 'current (o)'
+            on_release: language_dropdown.open(self)
+
+        DropDown:
+            id: language_dropdown
+            on_select: language_button.text = '{}'.format(args[1])
+    Button:
+        text: 'Delete'
+        size_hint_x: None
+        margin: 20
+        width: 100
+        background_color: 1, 0, 0, 1  # Red color
+        on_release: root.delete_self()
+
+<ThirdScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+
+        ScrollView:
+            id: scroll_view
+            BoxLayout:
+                id: container
+                orientation: 'vertical'
+                size_hint_y: None
+                height: self.minimum_height
+        Label:
+            id: validation_label
+            size_hint_y: None
+            color: 1, 0, 0, 1
+            height: 50
+            text: ''
+        Button:
+            text: 'Add Internet Media Panel'
+            size_hint_y: None
+            height: 50
+            on_press: root.add_media_search_component()
+        Button:
+            text: 'Add Storage Media Panel'
+            size_hint_y: None
+            height: 50
+            on_press: root.add_media_component()
+        Button:
+            text: 'Create Video'
+            size_hint_y: None
+            height: 50
+            on_press: root.create_video()
